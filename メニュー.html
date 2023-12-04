@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+	<title>メニュー</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.0.min.js"></script>
+	<script th:inline="javascript">
+		async function priced() {
+			const numberWithComma = new Intl.NumberFormat();
+			const tax = document.getElementById("tax").value / 100;
+			const piece = document.getElementsByClassName("pieced");
+			const unit = document.getElementsByClassName("unit");
+			let taxVal = 0
+			let taxout = 0
+			let taxin = 0
+			for (let i = 0; i < piece.length; i++) {
+				if (piece.item(i).value > 0) {
+					taxVal = taxVal + (unit.item(i).value * piece.item(i).value * tax)
+					taxout = taxout + (unit.item(i).value * piece.item(i).value)
+					taxin = taxout + taxVal
+				}
+			}
+			document.getElementById("out").innerHTML = "消費税抜:" + numberWithComma.format(taxout) + "円"
+			document.getElementById("val").innerHTML = "消費税:" + numberWithComma.format(taxVal) + "円"
+			document.getElementById("in").innerHTML = "合計金額:" + numberWithComma.format(taxin) + "円"
+		}
+
+
+		$(function () {
+			$("#shop").change(function () {
+				// value値を取得
+				const str1 = $("#shop").val();
+				console.log(str1)
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<header>
+		<h1 hidden>ヌーフバーガーキング</h1>
+	</header>
+	<main>
+		<aside>
+			<div id="fix">
+				<h1>ヌーフバーガーキング</h1>
+				<p>ようこそ！<a href="ユーザ詳細.html">username</a>さん</p>
+				<p><a href="カート.html">カート</a></p>
+				<h3>選択合計</h3>
+				<p id="out">税抜</p>
+				<p id="val">税</p>
+				<p id="in">価格</p>
+				<p><a href="ログイン.html">ログアウト</a></p>
+			</div>
+		</aside>
+
+		<article id="menu">
+			<section id="introImg">
+				<img src="img/amirali-mirhashemian-9hIJ4ZLMnZA-unsplash.jpg">
+				<img src="img/edward-franklin-Nb_Q-M3Cdzg-unsplash.jpg">
+			</section>
+			<section id="intro">
+				<h2>ヌーフが提供するバーガーとは...</h2>
+				<p>ヌーフは、”おいしい食事と共に楽しい時間を提供する”の元、おいしさと笑顔を提供するために、Feel-Goodなモーメントをいつでもどこでも届けることを目的にし、お客様が私たちの存在意義を提供してくださっています。
+				</p>
+			</section>
+			<section id="shopselect">
+				<h2>ヌーフ自慢のメニュー</h2>
+
+				<label class="selectbox-005">
+					店舗選択
+					<select name="shop">
+						<option value="">バーガーキング神田店</option>
+						<option value="">マクドナルド神田店</option>
+						<option value="">ケンタッキー神田店</option>
+						<option value="">モスバーガー神田店</option>
+						<option value="">ロッテリア神田店</option>
+					</select>
+				</label>
+			</section>
+			<section id="genreSe">
+				<p><a href="#1">ジャンル1</a></p>
+				<p><a href="#2">ジャンル2</a></p>
+			</section>
+			<input type="hidden" id="tax" value="10">
+
+			<form method="post" action="カート.html">
+				<p id="cartIntro">商品の個数を入力し、カートに追加してください</p>
+				<input id="cartAdd" type="submit" value="カート追加">
+				<h2 class="genre" id="1">ジャンル1</h2>
+				<div class="menu_con">
+					<section class="menuItem">
+						<img src="img/R.jfif">
+						<h3>商品名1</h3>
+						<p>備考</p>
+						<h4>アレルギー</h4>
+						<div id="al">
+							<p>アレ1</p>
+							<p>アレ2</p>
+							<p>アレ3</p>
+						</div>
+						<div id="price">
+							<p>税抜:</p>
+							<p>税:</p>
+							<p>価格:</p>
+						</div>
+						<input type="hidden" id="id" name="id" value="1">
+						<input type="hidden" id="unit" name="unit" class="unit" value="220">
+						<label class="piece" for="piece">個数<input type="number" class="pieced" name="piece" id="piece"
+								oninput="priced()"></label>
+					</section>
+
+					<section class="menuItem">
+						<img src="img/R.jfif">
+						<h3>商品名1</h3>
+						<p>備考</p>
+						<h4>アレルギー</h4>
+						<div id="al">
+							<p>アレ1</p>
+							<p>アレ2</p>
+							<p>アレ3</p>
+						</div>
+						<div id="price">
+							<p>税抜:</p>
+							<p>税:</p>
+							<p>価格:</p>
+						</div>
+						<input type="hidden" id="id" name="id" value="1">
+						<input type="hidden" id="unit" name="unit" class="unit" value="220">
+						<label class="piece" for="piece">個数<input type="number" class="pieced" name="piece" id="piece"
+								oninput="priced()"></label>
+					</section>
+
+					<section class="menuItem">
+						<img src="img/R.jfif">
+						<h3>商品名1</h3>
+						<p>備考</p>
+						<h4>アレルギー</h4>
+						<div id="al">
+							<p>アレ1</p>
+							<p>アレ2</p>
+							<p>アレ3</p>
+						</div>
+						<div id="price">
+							<p>税抜:</p>
+							<p>税:</p>
+							<p>価格:</p>
+						</div>
+						<input type="hidden" id="id" name="id" value="1">
+						<input type="hidden" id="unit" name="unit" class="unit" value="220">
+						<label class="piece" for="piece">個数<input type="number" class="pieced" name="piece" id="piece"
+								oninput="priced()"></label>
+					</section>
+
+					<section class="menuItem">
+						<img src="img/R.jfif">
+						<h3>商品名1</h3>
+						<p>備考</p>
+						<h4>アレルギー</h4>
+						<div id="al">
+							<p>アレ1</p>
+							<p>アレ2</p>
+							<p>アレ3</p>
+						</div>
+						<div id="price">
+							<p>税抜:</p>
+							<p>税:</p>
+							<p>価格:</p>
+						</div>
+						<input type="hidden" id="id" name="id" value="1">
+						<input type="hidden" id="unit" name="unit" class="unit" value="220">
+						<label class="piece" for="piece">個数<input type="number" class="pieced" name="piece" id="piece"
+								oninput="priced()"></label>
+					</section>
+
+					<section class="menuItem">
+						<img src="img/R.jfif">
+						<h3>商品名1</h3>
+						<p>備考</p>
+						<h4>アレルギー</h4>
+						<div id="al">
+							<p>アレ1</p>
+							<p>アレ2</p>
+							<p>アレ3</p>
+						</div>
+						<div id="price">
+							<p>税抜:</p>
+							<p>税:</p>
+							<p>価格:</p>
+						</div>
+						<input type="hidden" id="id" name="id" value="1">
+						<input type="hidden" id="unit" name="unit" class="unit" value="220">
+						<label class="piece" for="piece">個数<input type="number" class="pieced" name="piece" id="piece"
+								oninput="priced()"></label>
+					</section>
+				</div>
+
+				<h2 class="genre" id="2">ジャンル2</h2>
+				<div class="menu_con">
+					<section class="menuItem">
+						<img src="img/R.jfif">
+						<h3>商品名3</h3>
+						<p>備考</p>
+						<h4>アレルギー</h4>
+						<div id="al">
+							<p>アレ1</p>
+							<p>アレ2</p>
+							<p>アレ3</p>
+						</div>
+						<div id="price">
+							<p>税抜:</p>
+							<p>税:</p>
+							<p>価格:</p>
+						</div>
+						<input type="hidden" id="id" name="id" value="3">
+						<input type="hidden" id="unit" name="unit" class="unit" value="120">
+						<label class="piece" for="piece">個数<input type="number" class="pieced" name="piece" id="piece"
+								oninput="priced()"></label>
+					</section>
+
+
+				</div>
+				<form>
+		</article>
+	</main>
+	<footer>
+		<p>ヌーフバーガーキング</p>
+		<p>営業時間 9:30～21:00</p>
+	</footer>
+</body>
+
+</html>
